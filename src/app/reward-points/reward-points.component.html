@@ -1,0 +1,45 @@
+<div class="container">
+    <h1> Rewards Points</h1>
+    <br>
+    <div class="row">
+        <div class="col-sm-6">
+            <label>Customer</label> &nbsp;&nbsp;
+            <select [(ngModel)]="selectedCustomerId" (change)="customerOnChange()">
+                <option value="0">NONE</option>
+                <option *ngFor="let x of customers" [value]="x.customerId" >{{x.customerName}}</option>
+            </select>
+            
+        </div>
+    </div>
+    <br>
+    <div>
+        <table mat-table [dataSource]="rewardPoints" class="mat-elevation-z8">
+            <ng-container matColumnDef="monthAndYear">
+                <th mat-header-cell *matHeaderCellDef> Month - Year </th>
+                <td mat-cell *matCellDef="let element"> {{element.monthAndYear}} </td>
+            </ng-container> 
+            <ng-container matColumnDef="month">
+                <th mat-header-cell *matHeaderCellDef> Month </th>
+                <td mat-cell *matCellDef="let element"> {{element.month}} </td>
+            </ng-container>
+            <ng-container matColumnDef="year">
+                <th mat-header-cell *matHeaderCellDef> Year </th>
+                <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+            </ng-container>
+            <ng-container matColumnDef="rewards">
+                <th mat-header-cell *matHeaderCellDef> Rewards </th>
+                <td mat-cell *matCellDef="let element"> {{element.rewards}} </td>
+            </ng-container>
+            <ng-container matColumnDef="order">
+                <th mat-header-cell *matHeaderCellDef> order </th>
+                <td mat-cell *matCellDef="let element"> {{element.order}} </td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+        </table>
+        <div *ngIf="rewardPoints.length === 0">No records found</div>
+    </div>
+</div>
+
+

@@ -1,0 +1,57 @@
+<div>
+    <h2>Customer Transactions</h2>
+    <br>
+    <div class="row">
+        <div class="col-sm-6">
+            <label>Customer</label> &nbsp;&nbsp;
+            <select [(ngModel)]="selectedCustomerId" (change)="customerOnChange()">
+                <option value="0">NONE</option>
+                <option *ngFor="let x of customers" [value]="x.customerId" >{{x.customerName}}</option>
+            </select>
+            
+        </div>
+        <div class="col-sm-6">
+            <label>Transactions for Past</label>  &nbsp;&nbsp;
+            
+                    <select [(ngModel)]="noOfMonths" (change)="noOfMonthsChanged()">
+                        <option value="3">3 Months</option>
+                        <option value="6">6 Months</option>
+                        <option value="9">9 Months</option>
+                        <option value="12">12 Months</option>
+                        <option value="18">18 Months</option>
+                    </select>
+            
+        </div>
+    </div>
+    <br>
+    <div>
+        <table mat-table [dataSource]="orderDetails" class="mat-elevation-z8">
+            <ng-container matColumnDef="orderId">
+                <th mat-header-cell *matHeaderCellDef> Order Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.orderId}} </td>
+            </ng-container> 
+            <ng-container matColumnDef="customerId">
+                <th mat-header-cell *matHeaderCellDef> Customer Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.customerId}} </td>
+            </ng-container>
+            <ng-container matColumnDef="orderDate">
+                <th mat-header-cell *matHeaderCellDef> Order Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.orderDate}} </td>
+            </ng-container>
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+            </ng-container>
+            <ng-container matColumnDef="rewardPoints">
+                <th mat-header-cell *matHeaderCellDef> RewardPoints </th>
+                <td mat-cell *matCellDef="let element"> {{element.rewardPoints}} </td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+        </table>
+        <div *ngIf="orderDetails.length === 0">No records found</div>
+    </div>
+</div>
+
+
